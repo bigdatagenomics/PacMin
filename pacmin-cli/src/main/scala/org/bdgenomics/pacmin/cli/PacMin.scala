@@ -26,10 +26,9 @@ import org.bdgenomics.formats.avro.{
   NucleotideContigFragment
 }
 import org.bdgenomics.adam.cli.{
-  ADAMSparkCommand,
   ADAMCommandCompanion,
+  ADAMSparkCommand,
   ParquetArgs,
-  SparkArgs,
   Args4j,
   Args4jBase
 }
@@ -44,7 +43,7 @@ object PacMin extends ADAMCommandCompanion {
   }
 }
 
-class PacMinArgs extends Args4jBase with ParquetArgs with SparkArgs {
+class PacMinArgs extends Args4jBase with ParquetArgs {
   @Argument(metaVar = "READS", required = true, usage = "ADAM read-oriented data", index = 0)
   var readInput: String = _
 
