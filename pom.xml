@@ -21,7 +21,7 @@
     <scala.version>2.10.3</scala.version>
     <scala.version.prefix>2.10</scala.version.prefix>
     <avro.version>1.7.6</avro.version>
-    <spark.version>1.0.1</spark.version>
+    <spark.version>1.1.0</spark.version>
     <parquet.version>1.4.3</parquet.version>
     <!-- Edit the following line to configure the Hadoop (HDFS) version. -->
     <hadoop.version>2.2.0</hadoop.version>
@@ -372,6 +372,11 @@
       <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-core_${scala.version.prefix}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-graphx_${scala.version.prefix}</artifactId>
         <version>${spark.version}</version>
       </dependency>
       <dependency>

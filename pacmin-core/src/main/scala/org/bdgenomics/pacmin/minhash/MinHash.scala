@@ -29,7 +29,7 @@ import org.apache.spark.rdd.RDD
  * Cambridge University Press, 2011.
  *
  * This chapter may be freely (and legally) downloaded from:
- * 
+ *
  * http://infolab.stanford.edu/~ullman/mmds/ch3.pdf
  */
 object MinHash extends Serializable {
@@ -45,7 +45,7 @@ object MinHash extends Serializable {
    *
    * @tparam T This function will operate on RDDs containing any type T that
    *         extends the MinHashable trait.
-   * 
+   *
    * @param rdd The RDD of data points to compute similarity on.
    * @param signatureLength The length of MinHash signature to use.
    * @param randomSeed An optional seed for random number generation.

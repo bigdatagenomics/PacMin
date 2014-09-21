@@ -32,6 +32,9 @@ import org.bdgenomics.adam.cli.{
   Args4j,
   Args4jBase
 }
+import org.bdgenomics.adam.rdd.ADAMContext._
+import org.bdgenomics.pacmin.graph.OverlapGraph
+import org.bdgenomics.pacmin.overlapping.Overlapper
 
 object PacMin extends ADAMCommandCompanion {
 
@@ -48,13 +51,22 @@ class PacMinArgs extends Args4jBase with ParquetArgs {
   var readInput: String = _
 
   @Argument(metaVar = "CONTIGS", required = true, usage = "Contig output", index = 1)
-  var configFile: String = _
+  var contigOutput: String = _
 
   @option(name = "-debug", usage = "If set, prints a higher level of debug output.")
   var debug = false
 
-  @option(required = false, name = "-fragment_length", usage = "Sets maximum fragment length. Default value is 10,000. Values greater than 1e9 should be avoided.")
-  var fragmentLength: Long = 10000L
+  @option(required = true, name = "-overlap_threshold", usage = "Sets the similarity threshold for considering two reads to overlap.")
+  var overlapThreshold: Double = _
+
+  @option(required = true, name = "-signature_length", usage = "The length of MinHash signature to use.")
+  var signatureLength: Int = _
+
+  @option(required = true, name = "-kmer_length", usage = "The length of k-mers to use when shingling reads.")
+  var kmerLength: Int = _
+
+  @option(required = false, name = "-minhash_lsh_bands", usage = "If using approximate LSH for MinHashing, the number of bands to use.")
+  var bands: Int = -1
 }
 
 class PacMin(protected val args: PacMinArgs) extends ADAMSparkCommand[PacMinArgs] with Logging {
@@ -63,12 +75,36 @@ class PacMin(protected val args: PacMinArgs) extends ADAMSparkCommand[PacMinArgs
   val companion = PacMin
 
   /**
-   * Main method. Does nothing at the moment!
+   * Main method. Assembles an overlap graph by overlapping reads, then finds
+   * the multigs in the graph.
    *
    * @param sc SparkContext for RDDs.
    * @param job Hadoop Job container for file I/O.
    */
   def run(sc: SparkContext, job: Job) {
-    log.error("I don't do anything yet.")
+
+    // load reads
+    val reads: RDD[AlignmentRecord] = sc.adamLoad(args.readInput)
+
+    // if bands is set, wrap
+    val bands: Option[Int] = if (args.bands != -1) {
+      Some(args.bands)
+    } else {
+      None
+    }
+
+    // overlap reads
+    val overlapGraph = Overlapper(reads,
+      args.overlapThreshold,
+      args.signatureLength,
+      args.kmerLength,
+      bands)
+
+    // go from an overlap graph to multigs, via a string graph
+    val multigs = OverlapGraph(overlapGraph)
+
+    // save multigs as a text fastg
+    multigs.map(_.toFastg)
+      .saveAsTextFile(args.contigOutput)
   }
 }
