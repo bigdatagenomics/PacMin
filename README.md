@@ -56,4 +56,14 @@ freenode.net channel. Come join us and ask questions.
 
 PacMin is released under an [Apache 2.0 license](LICENSE.txt).
 
+# Distribution
 
+Snapshots of PacMin are available from the [Sonatype OSS](oss.sonatype.org) repository:
+
+```
+<groupId>org.bdgenomics.pacmin</groupId>
+<artifactId>pacmin-core</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+```
+
+Once we've got a release, we will publish to [Maven Central](search.maven.org).
