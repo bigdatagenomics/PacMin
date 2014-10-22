@@ -132,5 +132,9 @@
       <artifactId>scalatest_${scala.version.prefix}</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.bdgenomics.bdg-utils</groupId>
+      <artifactId>bdg-utils-minhash</artifactId>
+    </dependency>
   </dependencies>
 </project>

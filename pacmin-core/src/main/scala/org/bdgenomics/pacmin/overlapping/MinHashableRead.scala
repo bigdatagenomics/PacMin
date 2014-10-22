@@ -18,7 +18,7 @@
 package org.bdgenomics.pacmin.overlapping
 
 import org.bdgenomics.formats.avro.AlignmentRecord
-import org.bdgenomics.pacmin.minhash.MinHashable
+import org.bdgenomics.utils.minhash.MinHashable
 
 case class MinHashableRead(read: AlignmentRecord,
                            kmerLen: Int) extends MinHashable {
