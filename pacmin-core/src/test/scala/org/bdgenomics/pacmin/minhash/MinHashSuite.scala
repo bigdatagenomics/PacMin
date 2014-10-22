@@ -25,6 +25,14 @@ import scala.util.Random
 
 class MinHashSuite extends SparkFunSuite {
 
+  override val appName: String = "pacmin"
+  override val master: String = "local[4]"
+  override val properties: Map[String, String] = Map(
+    ("spark.serializer", "org.apache.spark.serializer.KryoSerializer"),
+    ("spark.kryo.registrator", "org.bdgenomics.adam.serialization.ADAMKryoRegistrator"),
+    ("spark.kryoserializer.buffer.mb", "4"),
+    ("spark.kryo.referenceTracking", "true"))
+
   def randomString(seed: Int, len: Int): String = {
     val r = new Random(seed)
 

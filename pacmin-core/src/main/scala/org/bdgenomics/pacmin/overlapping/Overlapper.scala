@@ -39,7 +39,7 @@ object Overlapper extends Serializable {
             overlapThreshold: Double,
             signatureLength: Int,
             kmerLength: Int,
-            bands: Option[Int]): Graph[Overlap, AlignmentRecord] = {
+            bands: Option[Int]): Graph[AlignmentRecord, Overlap] = {
     ???
   }
 }
