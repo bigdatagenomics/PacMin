@@ -17,10 +17,12 @@
  */
 package org.bdgenomics.pacmin.overlapping
 
+import org.bdgenomics.adam.util.SequenceUtils
 import org.bdgenomics.formats.avro.AlignmentRecord
 import org.bdgenomics.utils.minhash.MinHashable
 
-case class MinHashableRead(read: AlignmentRecord,
+case class MinHashableRead(id: Long,
+                           read: AlignmentRecord,
                            kmerLen: Int) extends MinHashable {
 
   /**
@@ -33,8 +35,24 @@ case class MinHashableRead(read: AlignmentRecord,
     read.getSequence
       .toString
       .sliding(kmerLen)
+      .map(canonicalize)
       .map(_.hashCode)
       .toArray
+  }
+
+  /**
+   * Canonicalizes a k-mer shingle.
+   *
+   * @param s k-mer to canonicalize.
+   * @return Returns the lexicographically canonicalized version of this string.
+   */
+  private[overlapping] def canonicalize(s: String): String = {
+    val rc = SequenceUtils.reverseComplement(s)
+    if (s.compareToIgnoreCase(rc) > 0) {
+      rc
+    } else {
+      s
+    }
   }
 
   override def toString: String = read.toString

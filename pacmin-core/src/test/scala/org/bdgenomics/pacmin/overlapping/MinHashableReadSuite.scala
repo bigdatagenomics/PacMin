@@ -74,7 +74,7 @@ class MinHashableReadSuite extends SparkFunSuite {
       .toSeq
       .map(s => {
         read += 1
-        MinHashableRead(AlignmentRecord.newBuilder()
+        MinHashableRead(read.toLong, AlignmentRecord.newBuilder()
           .setStart(read)
           .setSequence(s)
           .build(), kmerLength)
@@ -99,7 +99,7 @@ class MinHashableReadSuite extends SparkFunSuite {
       .toSeq
       .map(s => {
         read += 1
-        MinHashableRead(AlignmentRecord.newBuilder()
+        MinHashableRead(read.toLong, AlignmentRecord.newBuilder()
           .setStart(read)
           .setSequence(s)
           .build(), kmerLength)
@@ -143,7 +143,7 @@ class MinHashableReadSuite extends SparkFunSuite {
       .toSeq
       .map(s => {
         read += 1
-        MinHashableRead(AlignmentRecord.newBuilder()
+        MinHashableRead(read.toLong, AlignmentRecord.newBuilder()
           .setStart(read)
           .setSequence(s)
           .build(), kmerLength)
