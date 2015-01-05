@@ -15,15 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.bdgenomics.pacmin.minhash
+package org.bdgenomics.pacmin.overlapping
 
 import org.bdgenomics.adam.util.SparkFunSuite
 import org.bdgenomics.formats.avro.AlignmentRecord
-import org.bdgenomics.pacmin.overlapping.MinHashableRead
+import org.bdgenomics.utils.minhash.MinHash
 import scala.math.abs
 import scala.util.Random
 
-class MinHashSuite extends SparkFunSuite {
+class MinHashableReadSuite extends SparkFunSuite {
 
   override val appName: String = "pacmin"
   override val master: String = "local[4]"
@@ -74,7 +74,7 @@ class MinHashSuite extends SparkFunSuite {
       .toSeq
       .map(s => {
         read += 1
-        MinHashableRead(AlignmentRecord.newBuilder()
+        MinHashableRead(read.toLong, AlignmentRecord.newBuilder()
           .setStart(read)
           .setSequence(s)
           .build(), kmerLength)
@@ -99,7 +99,7 @@ class MinHashSuite extends SparkFunSuite {
       .toSeq
       .map(s => {
         read += 1
-        MinHashableRead(AlignmentRecord.newBuilder()
+        MinHashableRead(read.toLong, AlignmentRecord.newBuilder()
           .setStart(read)
           .setSequence(s)
           .build(), kmerLength)
@@ -143,7 +143,7 @@ class MinHashSuite extends SparkFunSuite {
       .toSeq
       .map(s => {
         read += 1
-        MinHashableRead(AlignmentRecord.newBuilder()
+        MinHashableRead(read.toLong, AlignmentRecord.newBuilder()
           .setStart(read)
           .setSequence(s)
           .build(), kmerLength)
