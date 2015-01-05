@@ -23,7 +23,10 @@ package org.bdgenomics.pacmin.models
  * @param estimatedSize The estimated size (in bases) of the overlap.
  * @param switchesStrands True if we believe that the two reads are from
  *                        different strands.
+ * @param correspondance The ranges in each read that are equivalent (alignment
+ *                       matches).
  */
 case class Overlap(estimatedSize: Int,
-                   switchesStrands: Boolean) {
+                   switchesStrands: Boolean,
+                   correspondance: Array[(Range, Range)]) {
 }

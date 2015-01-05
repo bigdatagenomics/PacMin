@@ -30,7 +30,7 @@ object OverlapGraph {
    * @param overlapGraph Input graph of overlapping reads.
    * @return Returns a set of multigs (multi-allele contigs).
    */
-  def apply(overlapGraph: Graph[Overlap, AlignmentRecord]): RDD[Multig] = {
+  def apply(overlapGraph: Graph[AlignmentRecord, Overlap]): RDD[Multig] = {
     // reduce this string graph down into quasitigs
     val quasitigGraph = transitivelyReduceOverlaps(overlapGraph)
 
@@ -54,7 +54,7 @@ object OverlapGraph {
    * @return Returns a quasitig graph, which provides a set of quasitigs which
    *         are linked by spanning reads.
    */
-  private[graph] def transitivelyReduceOverlaps(stringGraph: Graph[Overlap, AlignmentRecord]): Graph[Linkage, Quasitig] = {
+  private[graph] def transitivelyReduceOverlaps(stringGraph: Graph[AlignmentRecord, Overlap]): Graph[Linkage, Quasitig] = {
     ???
   }
 
