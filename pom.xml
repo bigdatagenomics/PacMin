@@ -21,13 +21,13 @@
     <scala.version>2.10.3</scala.version>
     <scala.version.prefix>2.10</scala.version.prefix>
     <avro.version>1.7.6</avro.version>
-    <spark.version>1.1.0</spark.version>
-    <parquet.version>1.4.3</parquet.version>
+    <spark.version>1.2.0</spark.version>
+    <parquet.version>1.6.0rc4</parquet.version>
     <!-- Edit the following line to configure the Hadoop (HDFS) version. -->
     <hadoop.version>2.2.0</hadoop.version>
     <scoverage.version>0.99.2</scoverage.version>
-    <adam.version>0.14.1-SNAPSHOT</adam.version>
-    <bdg.utils.version>0.0.2-SNAPSHOT</bdg.utils.version>
+    <adam.version>0.16.1-SNAPSHOT</adam.version>
+    <bdg.utils.version>0.1.3-SNAPSHOT</bdg.utils.version>
     <avocado.version>0.0.3-SNAPSHOT</avocado.version>
   </properties>
   
@@ -350,13 +350,6 @@
       </dependency>
       <dependency>
         <groupId>org.bdgenomics.adam</groupId>
-        <artifactId>adam-core</artifactId>
-        <version>${adam.version}</version>
-        <type>test-jar</type>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.bdgenomics.adam</groupId>
         <artifactId>adam-cli</artifactId>
         <version>${adam.version}</version>
       </dependency>
@@ -388,6 +381,13 @@
       </dependency>
       <dependency>
         <groupId>org.bdgenomics.bdg-utils</groupId>
+        <artifactId>bdg-utils-misc</artifactId>
+        <version>${bdg.utils.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.bdgenomics.bdg-utils</groupId>
         <artifactId>bdg-utils-minhash</artifactId>
         <version>${bdg.utils.version}</version>
       </dependency>
@@ -400,6 +400,14 @@
   </dependencyManagement>
 
   <profiles>
+    <profile>
+      <id>distribution</id>
+      <modules>
+        <module>pacmin-core</module>
+        <module>pacmin-cli</module>
+        <module>pacmin-distribution</module>
+      </modules>
+    </profile>
     <!-- Only sign artifacts when we are performing a release, not snapshots -->
     <profile>
       <id>sonatype-oss-release</id>
