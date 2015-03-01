@@ -47,18 +47,13 @@ Once this alias is in place, you can run adam by simply typing `pacmin` at the c
 
 # Getting In Touch
 
-## IRC Channel
-
-A lot of the developers are hanging on the [#adamdev](http://webchat.freenode.net/?channels=adamdev)
-freenode.net channel. Come join us and ask questions.
-
 # License
 
-PacMin is released under an [Apache 2.0 license](LICENSE.txt).
+PacMin is released under an [Apache 2.0 license](https://github.com/bigdatagenomics/PacMin/blob/master/LICENSE).
 
 # Distribution
 
-Snapshots of PacMin are available from the [Sonatype OSS](oss.sonatype.org) repository:
+Snapshots of PacMin are available from the [Sonatype OSS](https://oss.sonatype.org) repository:
 
 ```
 <groupId>org.bdgenomics.pacmin</groupId>
@@ -66,4 +61,4 @@ Snapshots of PacMin are available from the [Sonatype OSS](oss.sonatype.org) repo
 <version>0.0.1-SNAPSHOT</version>
 ```
 
-Once we've got a release, we will publish to [Maven Central](search.maven.org).
+Once we've got a release, we will publish to [Maven Central](http://search.maven.org).

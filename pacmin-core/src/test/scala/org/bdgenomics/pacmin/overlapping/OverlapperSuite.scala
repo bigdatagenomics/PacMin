@@ -17,20 +17,13 @@
  */
 package org.bdgenomics.pacmin.overlapping
 
-import org.bdgenomics.adam.util.{ SequenceUtils, SparkFunSuite }
+import org.bdgenomics.adam.util.SequenceUtils
 import org.bdgenomics.formats.avro.AlignmentRecord
+import org.bdgenomics.pacmin.utils.PacMinFunSuite
 import scala.math.abs
 import scala.util.Random
 
-class OverlapperSuite extends SparkFunSuite {
-
-  override val appName: String = "pacmin"
-  override val master: String = "local[4]"
-  override val properties: Map[String, String] = Map(
-    ("spark.serializer", "org.apache.spark.serializer.KryoSerializer"),
-    ("spark.kryo.registrator", "org.bdgenomics.adam.serialization.ADAMKryoRegistrator"),
-    ("spark.kryoserializer.buffer.mb", "4"),
-    ("spark.kryo.referenceTracking", "true"))
+class OverlapperSuite extends PacMinFunSuite {
 
   val kmerLength = 15
 
