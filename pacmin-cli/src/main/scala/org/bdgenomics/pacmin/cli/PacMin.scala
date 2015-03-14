@@ -84,7 +84,7 @@ class PacMin(protected val args: PacMinArgs) extends ADAMSparkCommand[PacMinArgs
   def run(sc: SparkContext, job: Job) {
 
     // load reads
-    val reads: RDD[AlignmentRecord] = sc.adamLoad(args.readInput)
+    val reads: RDD[AlignmentRecord] = sc.loadAlignments(args.readInput)
 
     // if bands is set, wrap
     val bands: Option[Int] = if (args.bands != -1) {
